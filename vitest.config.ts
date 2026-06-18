@@ -5,9 +5,7 @@ export default defineConfig({
     // Human-readable output with per-test results
     reporter: 'verbose',
 
-    // Phase 0 has no tests yet; this keeps CI green on the scaffold commit.
-    // Remove this flag once Phase 1 tests land — we want failures if tests disappear.
-    passWithNoTests: true,
+ 
 
     // Istanbul-based coverage via V8 — faster than Babel instrumentation
     coverage: {

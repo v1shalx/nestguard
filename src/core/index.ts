@@ -1,14 +1,11 @@
 /**
- * @module @nestguard/core
+ * @module nestguard/core
  *
  * Framework-agnostic permission engine.
- * Zero NestJS imports — this module must stay portable.
- *
- * Public surface (populated in Phase 1):
- *   - Subject, SubjectResolver (types)
- *   - can() (decision function)
- *   - matchesPermission() (matcher, exposed for testing / custom resolvers)
+ * Zero NestJS imports — this module stays portable across adapters.
  */
 
-// Populated in Phase 1 — nothing to export yet.
-export {};
+export type { Subject, Permission, SubjectResolver } from './types.js';
+export type { CanOptions } from './engine.js';
+export { can } from './engine.js';
+export { matchesPermission, subjectHasPermission } from './matcher.js';
