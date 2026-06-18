@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    // Targeting ES2020 gives us async/await, optional chaining, nullish coalescing
+    // without requiring too modern a Node.js in consumer environments.
+    "target": "ES2020",
+    "lib": ["ES2020"],
+
+    // ESNext module + Bundler resolution: tsup/esbuild handles the actual
+    // module format; this combo avoids the need for .js extensions on relative
+    // imports while still being fully correct for type-checking.
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
+    // Emit declarations alongside build output (tsup reads these for .d.ts gen)
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    // Strict suite — all of these or none. Partial strict is worse than no strict.
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Required for tsup's per-file compilation strategy
+    "isolatedModules": true,
+
+    // Standard interop + safety
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+
+    // TypeScript 6 deprecated baseUrl; tsup injects it internally during DTS generation.
+    // This silences the resulting deprecation error without changing any behaviour.
+    "ignoreDeprecations": "6.0",
+
+    // Emit is handled by tsup; tsc is used for type-checking only
+    "noEmit": false,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules", "dist", "examples", "coverage"]
+}

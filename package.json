@@ -1,0 +1,88 @@
+{
+  "name": "nestguard",
+  "version": "0.0.1",
+  "description": "A drop-in, multi-tenant role & permission engine for NestJS with a framework-agnostic core.",
+  "author": "",
+  "license": "MIT",
+  "keywords": [
+    "nestjs",
+    "authorization",
+    "permissions",
+    "roles",
+    "rbac",
+    "multi-tenant",
+    "guard"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./nestjs": {
+      "types": "./dist/nestjs/index.d.ts",
+      "import": "./dist/nestjs/index.mjs",
+      "require": "./dist/nestjs/index.js"
+    },
+    "./postgres": {
+      "types": "./dist/stores/postgres/index.d.ts",
+      "import": "./dist/stores/postgres/index.mjs",
+      "require": "./dist/stores/postgres/index.js"
+    },
+    "./redis": {
+      "types": "./dist/stores/redis-cache/index.d.ts",
+      "import": "./dist/stores/redis-cache/index.mjs",
+      "require": "./dist/stores/redis-cache/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run lint && npm run test && npm run build"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/core": "^10.0.0",
+    "reflect-metadata": "^0.1.13 || ^0.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@nestjs/common": {
+      "optional": true
+    },
+    "@nestjs/core": {
+      "optional": true
+    },
+    "reflect-metadata": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@vitest/coverage-v8": "^4.1.9",
+    "eslint": "^10.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.4",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1",
+    "vitest": "^4.1.9"
+  }
+}
