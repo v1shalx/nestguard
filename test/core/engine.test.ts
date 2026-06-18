@@ -1,13 +1,14 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { can } from '../../src/core/engine.js';
 import type { Subject } from '../../src/core/types.js';
 
 /** Build a minimal Subject for tests — only set what the test needs. */
-function makeSubject(permissions: string[]): Subject {
+function makeSubject(permissions: string[], overrides: Partial<Subject> = {}): Subject {
   return {
     id: 'user-1',
     roles: [],
     permissions: new Set(permissions),
+    ...overrides,
   };
 }
 
@@ -19,6 +20,10 @@ describe('can()', () => {
 
     it('denies when subject lacks the required permission', () => {
       expect(can(makeSubject(['profile.read']), 'invoice.edit')).toBe(false);
+    });
+
+    it('denies an array of required perms when subject has none', () => {
+      expect(can(makeSubject([]), ['invoice.edit', 'audit.read'])).toBe(false);
     });
   });
 
@@ -96,6 +101,11 @@ describe('can()', () => {
         permissions: new Set(['invoice.edit']),
       };
       expect(can(subject, 'invoice.edit')).toBe(true);
+    });
+
+    it('superuser wildcard satisfies any multi-permission AND check', () => {
+      const subject = makeSubject(['*']);
+      expect(can(subject, ['invoice.edit', 'audit.log', 'admin.users'])).toBe(true);
     });
   });
 });

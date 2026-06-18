@@ -16,6 +16,11 @@
     "declarationMap": true,
     "sourceMap": true,
 
+    // Required by NestJS — enables the legacy decorator metadata emit that
+    // NestJS DI and Reflector depend on at runtime.
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
     // Strict suite — all of these or none. Partial strict is worse than no strict.
     "strict": true,
     "noUnusedLocals": true,
